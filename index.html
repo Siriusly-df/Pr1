@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Калькулятор ІМТ</title>
+</head>
+<body>
+<script>
+  function mainMenu() {
+    let choice;
+    do {
+      choice = prompt(
+        "== Головне меню ==\n" +
+        "1. Розрахувати ІМТ\n" +
+        "2. Теоретичний матеріал\n" +
+        "3. Інформація про автора\n" +
+        "4. Вихід\n\n" +
+        "Оберіть пункт меню (1-4):"
+      );
+
+      switch (choice) {
+        case "1":
+          calculateIMT();
+          break;
+        case "2":
+          theoryMenu();
+          break;
+        case "3":
+          alert("Автор: Ліхарєв Євгеній Валерійович, група ПД-25");
+          break;
+        case "4":
+          alert("Програму завершено.");
+          break;
+        default:
+          if (choice !== null) {
+            alert("Невірний вибір, спробуйте ще раз.");
+          }
+      }
+    } while (choice !== "4" && choice !== null);
+  }
+
+  function calculateIMT() {
+    let w = prompt("Введіть вашу вагу (кг):");
+    let weight = parseFloat(w);
+
+    if (isNaN(weight) || weight <= 0) {
+      alert("Помилка: введіть коректне додатнє число для ваги.");
+      return;
+    }
+
+    let h = prompt("Введіть ваш зріст (см):");
+    let height = parseFloat(h);
+
+    if (isNaN(height) || height <= 0) {
+      alert("Помилка: введіть коректне додатнє число для зросту.");
+      return;
+    }
+
+    let heightM = height / 100;
+    let imt = weight / (heightM * heightM);
+
+    let result;
+    if (imt < 18.5) result = "Недостатня вага";
+    else if (imt < 25) result = "Норма";
+    else if (imt < 30) result = "Надмірна вага";
+    else result = "Ожиріння";
+
+    alert("Ваш ІМТ: " + imt.toFixed(2) + " (" + result + ")");
+  }
+
+  function theoryMenu() {
+    let choice;
+    do {
+      choice = prompt(
+        "== Теоретичний матеріал ==\n" +
+        "1. Формула розрахунку ІМТ\n" +
+        "2. Таблиця інтерпретацій\n" +
+        "3. Повернутись у головне меню\n\n" +
+        "Оберіть пункт меню (1-3):"
+      );
+
+      switch (choice) {
+        case "1":
+          alert("Формула: ІМТ = вага (кг) / (зріст (м))²");
+          break;
+        case "2":
+          alert(
+            "Інтерпретація:\n" +
+            "Менше 18.5 – недостатня вага\n" +
+            "18.5–24.9 – норма\n" +
+            "25–29.9 – надмірна вага\n" +
+            "30+ – ожиріння"
+          );
+          break;
+        case "3":
+          return; 
+        default:
+          if (choice !== null) {
+            alert("Невірний вибір.");
+          }
+      }
+    } while (choice !== "3" && choice !== null);
+  }
+
+  mainMenu();
+</script>
+</body>
+</html>
